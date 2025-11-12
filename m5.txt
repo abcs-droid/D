@@ -1,0 +1,21 @@
+pip install mlxtend
+import pandas as pd
+import csv
+from mlxtend.preprocessing import TransactionEncoder
+from mlxtend.frequent_patterns import apriori, association_rules
+
+dataset = []
+with open('Market_Basket_Optimisation.csv') as file:
+reader = csv.reader(file, delimiter=',')
+for row in reader:
+dataset += [row]
+dataset[1:10]
+dataset
+len(dataset)
+te = TransactionEncoder()
+x = te.fit_transform(dataset)
+x
+len(te.columns_)
+df = pd.DataFrame(x, columns = te.columns_)
+df.head()
+df
