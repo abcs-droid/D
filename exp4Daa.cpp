@@ -5,11 +5,11 @@ using namespace std;
 class TSP
 {
 private:
-	int n;					  // Number of cities
-	vector<vector<int>> dist; // Distance matrix
-	int minCost = INT_MAX;	  // Minimum cost found
-	vector<int> bestPath;	  // Best path found
-	// Helper function to calculate the lower bound (minimum cost estimate) for a partial path
+	int n;					  
+	vector<vector<int>> dist; 
+	int minCost = INT_MAX;	  
+	vector<int> bestPath;	  
+
 	int calculateLowerBound(const vector<int> &path, const vector<bool> &visited)
 	{
 		int bound = 0;
@@ -30,7 +30,7 @@ private:
 		}
 		return bound;
 	}
-	// Recursive function to explore paths using Branch and Bound
+	
 	void branchAndBoundUtil(vector<int> &path, vector<bool> &visited, int currentCost, int level)
 	{
 		if (level == n)
@@ -40,7 +40,7 @@ private:
 			{
 				minCost = totalCost;
 				bestPath = path;
-				bestPath.push_back(path[0]); // Complete the cycle
+				bestPath.push_back(path[0]); 
 			}
 			return;
 		}
@@ -65,7 +65,7 @@ public:
 	TSP(int cities, const vector<vector<int>> &distance) : n(cities), dist(distance) {}
 	void solve()
 	{
-		vector<int> path = {0}; // Start from city 0
+		vector<int> path = {0}; 
 		vector<bool> visited(n, false);
 		visited[0] = true;
 		branchAndBoundUtil(path, visited, 0, 1);
@@ -84,9 +84,6 @@ public:
 int main()
 {
 	int n;
-	cout << "Anurag Kanhed\n";
-	cout << "307A028\n";
-	cout << "72307409H\n";
 	cout << "Enter the number of cities: ";
 	cin >> n;
 	vector<vector<int>> dist(n, vector<int>(n));
