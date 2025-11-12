@@ -1,55 +1,68 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-bool isSafe(int row, int col, vector<int> &board)
-{
-	for (int i = 0; i < row; ++i)
-	{
-		// Check column and diagonals
-		if (board[i] == col || board[i] - i == col - row || board[i] + i == col + row)
-		{
-			return false;
-		}
-	}
-	return true;
+
+bool isSafe(vector<vector<int>>& board, int row, int col, int n) {
+    
+    for(int i = 0; i < row; i++) {
+        if(board[i][col] == 1)
+            return false;
+    }
+
+    
+    for(int i = row-1, j = col-1; i >= 0 && j >= 0; i--, j--) {
+        if(board[i][j] == 1)
+            return false;
+    }
+
+    
+    for(int i = row-1, j = col+1; i >= 0 && j < n; i--, j++) {
+        if(board[i][j] == 1)
+            return false;
+    }
+
+    return true;
 }
-bool solveNQueens(int row, vector<int> &board, int N)
-{
-	if (row == N)
-	{
-		for (int i = 0; i < N; ++i)
-		{
-			for (int j = 0; j < N; ++j)
-			{
-				cout << (board[i] == j ? "Q " : ". ");
-			}
-			cout << endl;
-		}
-		return true;
-	}
-	for (int col = 0; col < N; ++col)
-	{
-		if (isSafe(row, col, board))
-		{
-			board[row] = col;
-			if (solveNQueens(row + 1, board, N))
-				return true;
-		}
-	}
-	return false;
+
+bool solveNQueen(vector<vector<int>>& board, int row, int n) {
+    
+    if(row == n) {
+        return true;
+    }
+
+  
+    for(int col = 0; col < n; col++) {
+        if(isSafe(board, row, col, n)) {
+            board[row][col] = 1;   
+
+            if(solveNQueen(board, row + 1, n)) 
+                return true;
+
+            board[row][col] = 0;   
+        }
+    }
+    return false;
 }
-int main()
-{
-	int N;
-	cout << "Anurag Kanhed\n";
-	cout << "307A028\n";
-	cout << "72307409H\n";
-	cout << "Enter the size of the chessboard (N): ";
-	cin >> N;
-	vector<int> board(N, -1); // Initialize the board with -1 (no queen placed)
-	if (!solveNQueens(0, board, N))
-	{
-		cout << "No solution exists for " << N << " queens." << endl;
-	}
-	return 0;
+
+int main() {
+    int n;
+    cout << "Enter number of queens: ";
+    cin >> n;
+
+    vector<vector<int>> board(n, vector<int>(n, 0));
+
+    if(solveNQueen(board, 0, n)) {
+        cout << "Solution:\n";
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                cout << board[i][j] << " ";
+            }
+            cout << endl;
+        }
+    } 
+    else {
+        cout << "No solution exists for " << n << " queens.";
+    }
+
+    return 0;
 }
