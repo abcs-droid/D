@@ -26,9 +26,6 @@ int zeroOneKnapsack(int capacity, Item items[], int n)
 }
 int main()
 {
-    cout << "Anurag Kanhed\n";
-	cout << "307A028\n";
-	cout << "72307409H\n";
     int n;
     cout << "Enter number of items: ";
     cin >> n;
@@ -47,4 +44,5 @@ int main()
     cout << "Maximum value in 0/1 Knapsack = " << maxValue << endl;
     delete[] items;
     return 0;
+
 }
