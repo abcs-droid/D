@@ -36,9 +36,6 @@ double fractionalKnapsack(int capacity, Item items[], int n)
 }
 int main()
 {
-	cout << "Anurag Kanhed\n";
-	cout << "307A028\n";
-	cout << "72307409H\n";
 	int n;
 	cout << "Enter the number of items: ";
 
