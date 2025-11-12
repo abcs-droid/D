@@ -17,15 +17,23 @@ from sklearn.model_selection import train_test_split
 train, test = train_test_split(df, random_state = 0, test_size = 0.25)
 train.shape
 test.shape
+
 import numpy as np
-actual = list(np.ones(45)) + list(np.zeros(55))
+TP=45
+FP=55
+FN=5
+TN=395
+actual = [1]*TP+[1]*FN+[0]*FP+[0]*TN
 np.array(actual)
-predicted = list(np.ones(40)) + list(np.zeros(52)) + list(np.ones(8))
+predicted = [1]*TP+[0]*FN+[1]*FP+[0]*TN
 np.array(predicted)
+
 from sklearn.metrics import ConfusionMatrixDisplay
 ConfusionMatrixDisplay.from_predictions(actual, predicted)
 from sklearn.metrics import classification_report
 print(classification_report(actual, predicted))
 from sklearn.metrics import accuracy_score
 accuracy_score(actual, predicted)
+from sklearn.metrics import precision_score, recall_score, f1_score
+print(accuracy_score(actual, predicted), precision_score(actual, predicted), recall_score(actual, predicted), f1_score(actual, predicted))
 print(accuracy_score(actual, predicted))
