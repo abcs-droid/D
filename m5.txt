@@ -9,13 +9,24 @@ with open('Market_Basket_Optimisation.csv') as file:
 reader = csv.reader(file, delimiter=',')
 for row in reader:
 dataset += [row]
+
 dataset[1:10]
 dataset
 len(dataset)
+
 te = TransactionEncoder()
 x = te.fit_transform(dataset)
 x
+
 len(te.columns_)
 df = pd.DataFrame(x, columns = te.columns_)
 df.head()
-df
+
+frequent_itemset=apriori(df,min_support=0.01,use_colnames=True)
+frequent_itemset
+
+rules=association_rules(frequent_itemset,metric="confidence",min_threshold=0.35)
+rules=rules[['antecedents','consequents','support','confidence']]
+rules.head()
+
+rules[rules['antecedents']=={'chicken'}]['consequents']
